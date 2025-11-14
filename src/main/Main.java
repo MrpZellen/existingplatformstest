@@ -16,7 +16,8 @@ public class Main {
 
         //Add Main.Main.GamePanel to the window
         GamePanel gp = new GamePanel();
-        window.add(gp);
+        Game960Panel g960p = new Game960Panel();
+        window.add(g960p);
         window.pack();
 
         window.setLocationRelativeTo(null);
