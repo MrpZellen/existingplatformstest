@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
     boolean gameOver;
     boolean stalemate;
 
+
     public GamePanel() {
 
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
@@ -46,7 +47,6 @@ public class GamePanel extends JPanel implements Runnable{
 //        testIllegal();
         copyPieces(pieces, simPieces);
     }
-
     public void lauchGame() {
 
         gameThread = new Thread(this);
@@ -54,6 +54,9 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
 
+    public ArrayList<Piece> getPieces() {
+        return pieces;
+    }
     public void setPieces() {
 
         // WHITE TEAM

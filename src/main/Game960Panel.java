@@ -57,8 +57,12 @@ public class Game960Panel extends JPanel implements Runnable{
         gameThread.start();
 
     }
+    public ArrayList<Piece> getPieces() {
+        return pieces;
+    }
 
     public void setPieces() {
+        pieces = new ArrayList<>();
         Integer[] randNum = {0, 1, 2, 3, 4, 5, 6, 7};
         List randNumList = Arrays.asList(randNum);
         // WHITE TEAM
@@ -659,4 +663,5 @@ public class Game960Panel extends JPanel implements Runnable{
 
         return false;
     }
+
 }
