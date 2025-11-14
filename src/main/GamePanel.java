@@ -405,14 +405,16 @@ public class GamePanel extends JPanel implements Runnable{
     private boolean isKingInCheck() {
 
         Piece king = getKing(true);
-
-        if (activeP.canMove(king.col, king.row)){
-            checkingP = activeP;
-            return true;
+        if(king != null){
+            if (activeP.canMove(king.col, king.row)){
+                checkingP = activeP;
+                return true;
+            }else {
+                checkingP = null;
+            }
         }else {
-            checkingP = null;
+            return true;
         }
-
         return false;
     }
 
@@ -463,7 +465,7 @@ public class GamePanel extends JPanel implements Runnable{
     private boolean isCheckMate(){
 
         Piece king = getKing(true);
-
+        if(king == null) return true;
         if (kingCanMove(king)) {
             return false;
         } else {
@@ -609,23 +611,24 @@ public class GamePanel extends JPanel implements Runnable{
         boolean isValidMove = false;
 
         // Update the temporary King position
-        king.col += colPlus;
-        king.row += rowPlus;
+        if(king != null) {
+            king.col += colPlus;
+            king.row += rowPlus;
 
-        if (king.canMove(king.col, king.row)) {
-            if (king.hittingP != null) {
-                simPieces.remove(king.hittingP.getIndex());
+            if (king.canMove(king.col, king.row)) {
+                if (king.hittingP != null) {
+                    simPieces.remove(king.hittingP.getIndex());
+                }
+
+                if (isIllegal(king) == false) {
+                    isValidMove = true;
+                }
             }
 
-            if (isIllegal(king) == false) {
-                isValidMove = true;
-            }
+            // Reset the temporary King position
+            king.resetPosition();
+            copyPieces(pieces, simPieces);
         }
-
-        // Reset the temporary King position
-        king.resetPosition();
-        copyPieces(pieces, simPieces);
-
         return isValidMove;
     }
 
